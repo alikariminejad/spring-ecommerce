@@ -3,6 +3,7 @@ package com.example.securitydemo;
 import com.example.securitydemo.jwt.AuthEntryPointJwt;
 import com.example.securitydemo.jwt.AuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -45,7 +46,7 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/h2-console/*").permitAll()
-                .requestMatchers("/api/signin").permitAll()
+                .requestMatchers("/signin").permitAll()
                 .anyRequest().authenticated());
         http.sessionManagement(session->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
@@ -57,27 +58,32 @@ public class SecurityConfig {
                 headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
         http.csrf(AbstractHttpConfigurer::disable);
         http.addFilterBefore(authenticationJwtTokenFilter(),
-                UsernamePasswordAuthenticationFilter.class)
+                UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
     @Bean
-    public UserDetailsService userDetailsService(){
-        UserDetails user1 = User.withUsername("user1")
-                .password(passwordEncoder().encode("password1"))
-                .roles("USER")
-                .build();
+    public UserDetailsService userDetailsService(DataSource dataSource){
+        return new JdbcUserDetailsManager(dataSource);
+    }
 
-        UserDetails admin = User.withUsername("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
-                .build();
+    @Bean
+    public CommandLineRunner initData(UserDetailsService userDetailsService){
+        return args -> {
+            JdbcUserDetailsManager manager = (JdbcUserDetailsManager) userDetailsService;
+            UserDetails user1 = User.withUsername("user1")
+                    .password(passwordEncoder().encode("password1"))
+                    .roles("USER")
+                    .build();
 
-        JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
-        userDetailsManager.createUser(user1);
-        userDetailsManager.createUser(admin);
-
-        return userDetailsManager;
+            UserDetails admin = User.withUsername("admin")
+                    .password(passwordEncoder().encode("admin"))
+                    .roles("ADMIN")
+                    .build();
+            JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
+            userDetailsManager.createUser(user1);
+            userDetailsManager.createUser(admin);
+        };
     }
 
     @Bean

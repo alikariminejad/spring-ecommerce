@@ -20,7 +20,7 @@ import java.util.Date;
 @Component
 public class JwtUtils {
     private static  final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
-    @Value("${spring.app.jwtExirationMs}")
+    @Value("${spring.app.jwtExpirationMs}")
     private int jwtExpirationMs;
     @Value("${spring.app.jwtSecret}")
     private String jwtSecret;
