@@ -38,7 +38,7 @@ public class JwtUtils {
         String username = userDetails.getUsername();
         return Jwts.builder()
                 .subject(username)
-                .issuedAt(new Date)
+                .issuedAt(new Date())
                 .expiration(new Date((new Date().getTime() + jwtExpirationMs)))
                 .signWith(key())
                 .compact();
@@ -74,6 +74,7 @@ public class JwtUtils {
         }catch (IllegalArgumentException exception){
             logger.error("JWT claims string is empty: {}", exception.getMessage());
         }
+        return false;
     }
 
 }
