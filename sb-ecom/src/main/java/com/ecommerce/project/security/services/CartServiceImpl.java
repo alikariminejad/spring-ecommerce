@@ -11,6 +11,7 @@ import com.ecommerce.project.repositories.CartItemRepository;
 import com.ecommerce.project.repositories.CartRepository;
 import com.ecommerce.project.repositories.ProductRepository;
 import com.ecommerce.project.service.CartService;
+import com.ecommerce.project.util.AuthUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class CartServiceImpl implements CartService {
     @Autowired
     AuthUtil authUtil;
 
-    @َAutowired
+    @Autowired
     CartItemRepository cartItemRepository;
 
     @Override
@@ -45,7 +46,7 @@ public class CartServiceImpl implements CartService {
                 productId
         );
         if(cartItem != null){
-            throw new APIException("Product " + product.getProductName() + "already exists in the cart.")
+            throw new APIException("Product " + product.getProductName() + "already exists in the cart.");
         }
         if(product.getQuantity() == 0){
             throw  new APIException(product.getProductName() + " is not available.");
