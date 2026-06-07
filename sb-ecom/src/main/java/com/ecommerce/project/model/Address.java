@@ -41,7 +41,7 @@ public class Address {
     private String country;
 
     @NotBlank
-    @Size(min=5, message = "Pincode name must atleast be 5 characters")
+    @Size(min=5, message = "Pincode number must atleast be 5 characters")
     private String pincode;
 
     @ManyToOne
@@ -56,6 +56,4 @@ public class Address {
         this.country = country;
         this.pincode = pincode;
     }
-
-
 }
