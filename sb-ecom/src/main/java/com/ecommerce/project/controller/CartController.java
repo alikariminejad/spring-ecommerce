@@ -35,7 +35,7 @@ public class CartController {
     @GetMapping("/carts")
     public ResponseEntity<List<CartDTO>> getCarts(){
         List<CartDTO> cartDTOs = cartService.getAllCarts();
-        return new ResponseEntity<List<CartDTO>>(cartDTOs, HttpStatus.FOUND);
+        return new ResponseEntity<List<CartDTO>>(cartDTOs, HttpStatus.OK);
     }
 
     @GetMapping("/carts/users/cart")
