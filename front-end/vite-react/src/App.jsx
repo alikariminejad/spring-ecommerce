@@ -23,11 +23,20 @@ function showAlert(condition, message) {
 }
 
 function App() {
+  // this is a comment
+  /*
+  this
+  is a
+  multi line
+  comment
+   */
   const now = new Date();
   const isMorning = now.getHours() < 12;
 
   return (
     <div>
+      {/* this is a 
+       comment in JSX */}
       {welcomeMessage("Ali")}
       {welcomeMessage("Bob")}
 
