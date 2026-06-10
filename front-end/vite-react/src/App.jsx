@@ -1,18 +1,39 @@
 import './App.css'
 
-function App() {
-  const loggedIn = true;
-  // if (loggedIn) {
-  //   return (<h1>Welcome to the website!</h1>)
-  // }
-  // return (<h1>Please Log in!</h1>)
+function welcomeMessage(name) {
+  return <h1>Hello, {name}</h1>;
+}
 
-  const element = <h1>{loggedIn ? "Welcome back!" : "Please Log in!"}</h1>
-  const messages = ["hi", "another message"]
+function Greeting(isMorning) {
+  if (isMorning) {
+    return <h1>Good Morning!</h1>;
+  }
+  return <h1>Good Evening!</h1>;
+}
+
+function AlertBox(message) {
+  return <div className='alert'>{message}</div>;
+}
+
+function showAlert(condition, message) {
+  if (condition) {
+    return AlertBox(message);
+  }
+  return null;
+}
+
+function App() {
+  const now = new Date();
+  const isMorning = now.getHours() < 12;
+
   return (
     <div>
-        {element}
-        { messages.length > 0 && <h2>You have {messages.length} unread messages!</h2>}
+      {welcomeMessage("Ali")}
+      {welcomeMessage("Bob")}
+
+      {Greeting(isMorning)}
+
+      {showAlert(true, "This is important")}
     </div>
 
 
