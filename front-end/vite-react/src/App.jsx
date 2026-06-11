@@ -13,12 +13,27 @@ function App() {
     alert(`You clicked on: ${hobby}`);
   };
 
+  const aliProfile = {
+    name:"ALI",
+    age:28,
+    isMember:true,
+    hobbies:hobby1,
+    onHobbyClick:handleHobbyClick
+  }
+  const jackProfile = {
+    name:"Jack",
+    age:29,
+    isMember:false,
+    hobbies:hobby2,
+    onHobbyClick:handleHobbyClick
+  }
+
   return (
     <div className="App">
       <div>
         <h1>Hello</h1>
-        <ProfileCard name="ALI" age={28} isMember={true} hobbies={hobby1} onHobbyClick={handleHobbyClick} />
-        <ProfileCard name="Jack" age={29} isMember={false} hobbies={hobby2} onHobbyClick={handleHobbyClick}/>
+        <ProfileCard {...aliProfile} />
+        <ProfileCard {...jackProfile} />
       </div>
     </div>
   );
