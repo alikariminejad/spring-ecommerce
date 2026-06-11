@@ -1,4 +1,4 @@
-function ProfileCard({name, age, isMember, hobbies}) {
+function ProfileCard({name, age, isMember, hobbies, onHobbyClick}) {
     // // without destructuring, using Dot notation
     // const person = { name: "Ali", age: 28 }
     // const name = person.name;
@@ -14,7 +14,7 @@ function ProfileCard({name, age, isMember, hobbies}) {
             <h3>Hobbies</h3>
             <ul>
                 {hobbies.map((hobby, index) => {
-                    return <li key={index}>{hobby}</li>;
+                    return <li key={index} onClick={()=>onHobbyClick(hobby)}>{hobby}</li>;
                 })}
             </ul>
         </div>
