@@ -1,13 +1,19 @@
 import './App.css'
-import MyButton from "./button";
+import About from './components/About';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import ProjectList from './components/ProjectList';
 
 function App() {
 
   return (
     <div className="App">
-      <h1>Hi</h1>
-      <MyButton />
-      <MyButton />
+      <Header />
+      <About />
+      <ProjectList />
+      <Contact />
+      <Footer/>
     </div>
   );
 }
