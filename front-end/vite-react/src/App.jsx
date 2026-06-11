@@ -12,8 +12,8 @@ function App() {
     <div className="App">
       <div>
         <h1>Hello</h1>
-        <ProfileCard name="ALI"/>
-        <ProfileCard name="Jack"/>
+        <ProfileCard name="ALI" age={28} isMember={true} />
+        <ProfileCard name="Jack" age={29} isMember={false} />
       </div>
     </div>
   );
