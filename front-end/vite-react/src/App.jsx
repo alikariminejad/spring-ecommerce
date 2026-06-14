@@ -1,26 +1,19 @@
 import './App.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
-  const [backgroundColor, setBackgroundColor] = useState('#ffffff');
-  const colors = ['#ff0000', '#00ff00', '#0048ba', '#ffbf00', '#9966cc', '#eedfcc'];
-  const handleColorChange = (color) => {
-    setBackgroundColor(color);
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    document.title = `Count: ${count + 1}`;
+  }, [count])
+
+  const incrementCount = () => {
+    setCount(count + 1);
   };
-
   return (
-    <div className='App' style={{backgroundColor}}>
-      <h1>Color Picker</h1>
-      <div className='color-palette'>
-        {colors.map((color, index) => (
-          <div key={index} className='color-box' style={{ backgroundColor: color}} onClick={()=>handleColorChange(color)}></div>
-        ))}
-      </div>
-
-      <div className='custom-color-picker'>
-        <input type="color" value={backgroundColor} onChange={(e)=>handleColorChange(e.target.value)} />
-      </div>
-
+    <div className='App'>
+      <h1>useEffect Hook</h1>
+      <button onClick={incrementCount}>Increment</button>
     </div>
   );
 }
