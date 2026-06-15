@@ -2,18 +2,18 @@ import './App.css'
 import { useEffect, useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [anotherValue, setAnotherValue] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   useEffect(() => {
-    document.title = `Count: ${count + 1} | Another: ${anotherValue}`;
-    console.log(`useEffect triggered`);
-  })
+    const handleMouseMove = (event) => {
+      setMousePosition({ x: event.clientX, y: event.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+   }, []);
 
   return (
     <div className='App'>
-      <h1>useEffect Hook</h1>
-      <button onClick={()=>setCount(count+1)}>Increment</button>
-      <button onClick={()=>setAnotherValue(anotherValue+1)}>Increment value</button>
+      <h2>Mouse Position</h2>
+      <p>X: {mousePosition.x}, Y: {mousePosition.y}</p>
     </div>
   );
 }
