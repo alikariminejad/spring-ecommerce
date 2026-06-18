@@ -5,11 +5,18 @@ import React, { createContext, useContext, useEffect, useRef, useState } from 'r
 const ThemeContext = createContext('light');
 
 function App() {
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = ()=>{
+    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+  }
+
   return ( 
-    <ThemeContext.Provider value='dark'>
+    <ThemeContext.Provider value={theme}>
       <div style={{border:'2px solid black', padding:'20px'
       }}>
         <h2>App (Parent)</h2>
+        <button onClick={toggleTheme}>Toggle Theme</button>
         <ComponentA/>
       </div>
   </ThemeContext.Provider>
