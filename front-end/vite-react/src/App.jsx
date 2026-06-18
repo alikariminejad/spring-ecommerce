@@ -1,25 +1,30 @@
 import './App.css'
-import { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 function App() {
-
-  const [time, setTime] = useState(new Date());
+  const [stateCount, setStateCount] = useState(0);
+  const refCount = useRef(0);
 
   useEffect(() => {
-    const timerId = setInterval(() => { setTime(new Date()) }, 1000);
-    return () => clearInterval(timerId);
-  }, []);
-  
-  const formattedTime = time.toLocaleTimeString('en-US',
-      {hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      }
-  )
+    console.log('Component Re-rendered');
+  });
+
+  const incrementStateCount = () => {
+    setStateCount(stateCount + 1);
+  };
+
+  const incrementRefCount = () => {
+    refCount.current += 1;
+    console.log(`Ref Count: ${refCount.current}`)
+  };
+
   return ( 
-    <div className='clock-container'>
-      <div className='clock'>{formattedTime}</div>
-      
+    <div>
+      <p>State Count: {stateCount}</p>
+      <button onClick={incrementStateCount}>Increment State Count</button>
+
+      <p>Ref Count: {refCount.current}</p>
+      <button onClick={incrementRefCount}>Increment State Count</button>
     </div>
   );
 }
