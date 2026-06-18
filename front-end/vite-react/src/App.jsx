@@ -1,48 +1,50 @@
 import './App.css'
-import React, { useEffect, useRef, useState } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+
+
+const ThemeContext = createContext('light');
 
 function App() {
-  const theme = 'dark';
-
   return ( 
     <div style={{border:'2px solid black', padding:'20px'
     }}>
       <h2>App (Parent)</h2>
-      <ComponentA theme={theme}/>
+      <ComponentA/>
     </div>
 
   );
 }
 
-function ComponentA({ theme }) {
+function ComponentA() {
   return (
     <div style={{
-      border: '2px solid black', padding: '20px'
+      border: '2px solid blue', padding: '20px'
     }}>
       <h2>Component A(Child)</h2>
-      <ComponentB theme={theme} />
+      <ComponentB/>
     </div>
 
   );
 }
 
-  function ComponentB({ theme }) {
+  function ComponentB() {
     return (
       <div style={{
-        border: '2px solid black', padding: '20px'
+        border: '2px solid red', padding: '20px'
       }}>
         <h2>ComponentB(Grandchild)</h2>
-        <ThemedComponent theme={theme} />
+        <ThemedComponent/>
       </div>
 
     );
   }
 
 
-  function ThemedComponent({ theme }) {
+function ThemedComponent() {
+    const theme = useContext(ThemeContext)
     return (
       <div style={{
-        border: '2px solid black', padding: '20px'
+        border: '2px solid green', padding: '20px'
       }}>
         <h2>ThemedComponent (Great-Grandchild)</h2>
         <div>The current theme is: {theme}</div>
