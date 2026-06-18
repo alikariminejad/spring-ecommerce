@@ -2,39 +2,53 @@ import './App.css'
 import React, { useEffect, useRef, useState } from 'react';
 
 function App() {
-  const inputRef = useRef(null);
-  const inputRefNext = useRef(null);
-
-  useEffect(() => {
-    console.log('Component Rendered');
-  });
-
-  const focusInput = () => {
-    inputRef.current.focus();
-    inputRef.current.style.backgroundColor = 'yellow';
-  };
-  const focusInputNext = () => {
-    inputRefNext.current.focus();
-    inputRefNext.current.style.backgroundColor = 'blue';
-  };
-  
-  const resetFocus = () => {
-    inputRef.current.style.backgroundColor = 'white';
-    inputRefNext.current.style.backgroundColor = 'white';
-  };
+  const theme = 'dark';
 
   return ( 
-    <div>
-      <h1>Learn React</h1>
-      <input ref={inputRef} type="text" placeholder='Focus on me' />
-      <button onClick={focusInput}>Focus and Highlight</button>
-      
-      <input ref={inputRefNext} type="text" placeholder='Focus on me' />
-      <button onClick={focusInputNext}>Focus and Highlight</button>
-      
-      <button onClick={resetFocus}>reset</button>
+    <div style={{border:'2px solid black', padding:'20px'
+    }}>
+      <h2>App (Parent)</h2>
+      <ComponentA theme={theme}/>
     </div>
+
   );
 }
+
+function ComponentA({ theme }) {
+  return (
+    <div style={{
+      border: '2px solid black', padding: '20px'
+    }}>
+      <h2>Component A(Child)</h2>
+      <ComponentB theme={theme} />
+    </div>
+
+  );
+}
+
+  function ComponentB({ theme }) {
+    return (
+      <div style={{
+        border: '2px solid black', padding: '20px'
+      }}>
+        <h2>ComponentB(Grandchild)</h2>
+        <ThemedComponent theme={theme} />
+      </div>
+
+    );
+  }
+
+
+  function ThemedComponent({ theme }) {
+    return (
+      <div style={{
+        border: '2px solid black', padding: '20px'
+      }}>
+        <h2>ThemedComponent (Great-Grandchild)</h2>
+        <div>The current theme is: {theme}</div>
+      </div>
+
+    );
+  }
 
 export default App;
