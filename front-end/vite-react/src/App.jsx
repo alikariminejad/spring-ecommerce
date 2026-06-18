@@ -6,12 +6,13 @@ const ThemeContext = createContext('light');
 
 function App() {
   return ( 
-    <div style={{border:'2px solid black', padding:'20px'
-    }}>
-      <h2>App (Parent)</h2>
-      <ComponentA/>
-    </div>
-
+    <ThemeContext.Provider value='dark'>
+      <div style={{border:'2px solid black', padding:'20px'
+      }}>
+        <h2>App (Parent)</h2>
+        <ComponentA/>
+      </div>
+  </ThemeContext.Provider>
   );
 }
 
