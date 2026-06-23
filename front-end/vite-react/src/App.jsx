@@ -2,8 +2,18 @@ import axios from 'axios';
 import './App.css'
 import React, { useEffect, useState } from 'react';
 
+axios.interceptors.request.use(request => {
+  console.log('Starting request', request);
+  return request;
+});
+
+axios.interceptors.response.use(response => {
+  console.log('Response ', response);
+  return response;
+})
+
 function App() {
-  const data, setData = useState();
+  const [data, setData] = useState();
 
   const handleSubmit = (event) => {
     event.preventDefault();
