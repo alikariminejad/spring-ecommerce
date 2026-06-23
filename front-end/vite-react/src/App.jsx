@@ -9,6 +9,13 @@ function App() {
     console.log(data); 
     reset();
   };
+
+  // const validateName = (value) => {
+  //   if (value === 'admin') {
+  //     return 'Admin is not allowd';
+  //   };
+  //   return true;
+  // }
   
   const watchedName = watch('name');
   const watchedEmail = watch('email');
@@ -27,9 +34,16 @@ function App() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>
           Name:
-          <input {...register('name', {required:'Name is required', minLength:{value:2, message:"Name should be at least 2 characters"}})} />
+          <input {...register('name', {
+            required: 'Name is required',
+            minLength: { value: 2, message: "Name should be at least 2 characters" },
+            validate: {
+              notAdmin: (value) => value !== "admin" || "Admin is not allowd",
+              isNotNumber: (value)=> isNaN(value) || "Number is not allowed"
+            }
+          })} />
         </label>
-        {errors.name && <p>{errors.name.message}</p>}
+        {errors.name && <p>{errors.name.message || "Name is required and must be at least 2 characters"}</p>}
       
         <label>
           Email: 
