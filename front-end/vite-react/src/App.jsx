@@ -4,8 +4,12 @@ import { useForm } from 'react-hook-form';
 
 
 function App() {
-  const { register, handleSubmit, watch, formState:{errors}} = useForm();
-  const onSubmit = (data) => console.log(data);
+  const { register, handleSubmit, watch,reset, formState:{errors}} = useForm();
+  const onSubmit = (data) => {
+    console.log(data); 
+    reset();
+  };
+  
   const watchedName = watch('name');
   const watchedEmail = watch('email');
 
@@ -34,6 +38,7 @@ function App() {
         {errors.email && <p>Email is required</p>}
 
         <button type='submit'>submit</button>
+        <button type='button' onClick={()=>reset()}>reset</button>
       </form>
     </div>
   );
