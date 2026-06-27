@@ -6,6 +6,7 @@ import About from './About';
 import Contact from './Contact';
 import Team from './Team';
 import NotFound from './NotFound';
+import CurrentLocation from './CurrentLocation';
 
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
         <li><Link className='text-white hover:text-yellow-200 font-medium transition duration-300' to="/contact">Contact</Link></li>
       </ul>
         </nav>
+        <CurrentLocation />
         <div className='container mx-auto py-8'>
           <Routes>
             <Route path='/' element={<Home/>} />
