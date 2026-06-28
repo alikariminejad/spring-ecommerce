@@ -1,6 +1,6 @@
-import { createStoreHook } from "react-redux";
 import counterReducer from "./reducers/counterReducer";
+import { createStore } from "redux";
 
-const store = createStoreHook(counterReducer);
+const store = createStore(counterReducer);
 
 export default store;
